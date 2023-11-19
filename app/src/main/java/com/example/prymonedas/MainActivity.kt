@@ -1,13 +1,15 @@
 package com.example.prymonedas
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.InputFilter
+import android.text.Spanned
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Spinner
 import android.widget.Toast
-import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
+import java.util.regex.Pattern
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,6 +30,10 @@ class MainActivity : AppCompatActivity() {
 
         spinner.adapter = adapter
         spinner2.adapter = adapter
+
+        val editText: EditText = findViewById(R.id.etn_currency)
+        editText.setFilters(arrayOf<InputFilter>(DecimalDigitsInputFilter(5, 1)))
+
     }
 
     private fun convertCurrency() {
@@ -54,7 +60,6 @@ class MainActivity : AppCompatActivity() {
         val result = fromAmount.toDouble() * conversionRate
 
         val toastMessage = String.format("%.2f %s = %.2f %s", fromAmount.toDouble(), fromCurrency, result, toCurrency)
-        Toast.makeText(this, toastMessage, Toast.LENGTH_SHORT).show()
         showResult(toastMessage)
     }
 
@@ -71,5 +76,24 @@ class MainActivity : AppCompatActivity() {
     private fun showResult(result: String) {
         val resultTextView: EditText = findViewById(R.id.et_result)
         resultTextView.setText(result)
+    }
+
+    private class DecimalDigitsInputFilter(digitsBeforeZero: Int, digitsAfterZero: Int) :
+        InputFilter {
+        private val mPattern: Pattern
+        init {
+            mPattern = Pattern.compile("[0-9]{0,$digitsBeforeZero}+((\\.[0-9]{0,$digitsAfterZero})?)||(\\.)?")
+        }
+        override fun filter(
+            source: CharSequence,
+            start: Int,
+            end: Int,
+            dest: Spanned,
+            dstart: Int,
+            dend: Int
+        ): CharSequence? {
+            val matcher = mPattern.matcher(dest)
+            return if (!matcher.matches()) "" else null
+        }
     }
 }
