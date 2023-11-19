@@ -43,8 +43,8 @@
 
     <Button
         android:id="@+id/btn_convert"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="153dp"
+        android:layout_height="55dp"
         android:layout_marginBottom="80dp"
         android:background="@color/secondary"
         android:fontFamily="@font/inter"
@@ -57,24 +57,30 @@
         android:textSize="14dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_result" />
 
     <EditText
         android:id="@+id/et_result"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
+        android:layout_width="388dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="88dp"
         android:layout_marginBottom="184dp"
         android:width="200dp"
         android:ems="10"
         android:enabled="false"
         android:fontFamily="@font/dm_sans"
+        android:hint="Resultado"
         android:inputType="text"
-        android:text="Resultado"
+        android:text=""
+        android:textColor="@color/black"
         android:textSize="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sp_to"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView2"
@@ -97,7 +103,7 @@
         android:ems="10"
         android:fontFamily="@font/dm_sans"
         android:inputType="numberDecimal"
-        android:text="Ingrese el valor"
+        android:hint="Ingrese el valor"
         android:textSize="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
